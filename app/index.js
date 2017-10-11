@@ -1,13 +1,10 @@
 import React , { Component } from 'react'
 import ReactDOM from 'react-dom'
 import getRoutes from 'config/routes'
-
 import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import { routerReducer, syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 import * as reducers from 'redux/modules'
-import { hashHistory } from 'react-router'
 import createHistory from 'history/createBrowserHistory'
 
 const history = createHistory();
