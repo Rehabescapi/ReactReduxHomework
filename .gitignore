@@ -3,3 +3,4 @@ node_modules
 dist
 redux-schema.js
 firebase-schema.js
+app/config/constants.js

@@ -22,7 +22,7 @@ export default function Navigation (isAuthed){
 
 
 function NavLinks ({isAuthed}){
-    return isAuthed=== true
+    return isAuthed === true
     ?<ul>
         <li> <Link className={link} to='/'> Home </Link></li>
         </ul>
@@ -32,7 +32,7 @@ function NavLinks ({isAuthed}){
 function ActionLinks({isAuthed}){
     return isAuthed === true ? 
     <ul>
-        <li></li>
+        <li> </li>
         <li><Link className= {link} to='/logout'>{'Logout'} </Link></li>
     </ul>
     :<ul>
