@@ -1,0 +1,22 @@
+import { ref, firebaseAuth } from 'config/constants'
+
+export function auth (authType){
+    switch(authType) { 
+        case 'FACEBOOK_AUTH':
+        return firebaseAuth().signInWithPopup(new firebaseAuth.FacebookAuthProvider())
+        case 'GOOGLE_AUTH':
+        default : 
+        firebaseAuth().signInWithPopup( new firebaseAuth.EmailAuthProvider.credential(email, password))
+    }
+
+}
+
+
+export function logout () {
+    return firebaseAuth().signOut()
+}
+export function saveUser (user){
+return ref.child(`users/${user.uid}/info`)
+.set(user)
+.then(()=> user)
+}
