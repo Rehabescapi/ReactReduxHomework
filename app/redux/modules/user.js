@@ -50,7 +50,7 @@ function fetchingUserFailure (error) {
     }
   }
   
-  export function fetchAndHandleAutthedUser() {
+  export function fetchAndHandleAuthedUser() {
       return function (dispatch) {
           dispatch(fetchingUser())
           return auth().then(({user, credential })=> {
@@ -111,7 +111,8 @@ export default function users (state = initialState , action) {
         }
         case FETCHING_USER :
             return {
-
+                    ...state,
+                    isFetching:true
             }
         case FETCHING_USER_SUCCESS:
             return action.user === null
@@ -132,6 +133,11 @@ export default function users (state = initialState , action) {
             ...state,
             isFetching: false,
             error : action.error,
+        } 
+        case REMOVE_FETCHING_USER:
+        return {
+          ...state,
+          isFetching: false,
         }
 
 

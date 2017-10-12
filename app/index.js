@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import * as reducers from 'redux/modules'
 import createHistory from 'history/createBrowserHistory'
-
+import restricted from 'helpers/restricted'
 const history = createHistory();
 const middleware = routerMiddleware(history)
 
@@ -15,8 +15,8 @@ compose (applyMiddleware(middleware) ,
 window.devToolsExtension ? window.devToolsExtension() : (f) => f))
 
 
-function checkAuth( nextState, replace) {
-  return true
+function checkAuth( component) {
+  return restricted(component, store)
 }
 
 ReactDOM.render(

@@ -4,7 +4,7 @@ export function auth (authType){
     switch(authType) { 
         case 'FACEBOOK_AUTH':
         return firebaseAuth().signInWithPopup(new firebaseAuth.FacebookAuthProvider())
-        case 'GOOGLE_AUTH':
+        case 'FORM_AUTH':
         default : 
         firebaseAuth().signInWithPopup( new firebaseAuth.EmailAuthProvider.credential(email, password))
     }
