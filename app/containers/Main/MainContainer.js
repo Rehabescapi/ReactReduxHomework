@@ -37,7 +37,7 @@ import {firebaseAuth } from 'config/constants'
 
        return (
         <div className = {container}>
-            <Navigation isAuthed={false}/>
+            <Navigation isAuthed={this.props.isAuthed}/>
             <div className={innerContainer}> {this.props.children}</div>
         </div>
        )
@@ -48,6 +48,10 @@ MainContainer.propTypes = {
     isAuthed: PropTypes.bool.isRequired,
     authUser: PropTypes.func.isRequired,
     fetchingUserSuccess: PropTypes.func.isRequired,
+}
+
+MainContainer.contextTypes = {
+  router: PropTypes.object.isRequired,
 }
 
 export default withRouter(connect(

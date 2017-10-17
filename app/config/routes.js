@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router ,IndexRoute, Route , Switch } from 'react-router-dom'
-import {MainContainer, HomeContainer, AuthenticateContainer, NotFoundContainer}  from 'containers'
+import {MainContainer, HomeContainer, AuthenticateContainer, NotFoundContainer, FeedContainer}  from 'containers'
 
 export default function getRoutes (checkAuth, history){
     return (
@@ -9,6 +9,7 @@ export default function getRoutes (checkAuth, history){
             <Switch>
             <Route exact={true} path='/' component={HomeContainer}/>
             <Route path ='/login' component={checkAuth(AuthenticateContainer)}/>
+            <Route path ='/feed' component={checkAuth(FeedContainer)}/>
            
 
            <Route component={NotFoundContainer}/>
