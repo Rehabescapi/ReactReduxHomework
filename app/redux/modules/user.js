@@ -1,4 +1,4 @@
-import auth, {logout, saveUser } from 'helpers/auth'
+import  {auth , logout, saveUser } from 'helpers/auth'
 import {formatUserInfo } from 'helpers/utils'
 
 const AUTH_USER = 'AUTH_USER'
@@ -50,10 +50,11 @@ function fetchingUserFailure (error) {
     }
   }
   
-  export function fetchAndHandleAuthedUser() {
+  export function fetchAndHandleAuthedUser(authType) {
       return function (dispatch) {
           dispatch(fetchingUser())
-          return auth().then(({user, credential })=> {
+          console.log(authType);
+          return auth(authType).then(({user, credential })=> {
             const userData = user.providerData[0]
             const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
             return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
