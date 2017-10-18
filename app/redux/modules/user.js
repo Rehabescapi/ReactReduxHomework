@@ -27,8 +27,15 @@ function fetchingUser(){
     }
 }
 
+export function logoutAndUnauth () {
+    return function (dispatch) {
+      logout()
+      dispatch(unauthUser())
+    }
+  }
 function fetchingUserFailure (error) {
     console.warn(error)
+    console.log('woo');
     return {
       type: FETCHING_USER_FAILURE,
       error: 'Error fetching user',
@@ -56,7 +63,7 @@ function fetchingUserFailure (error) {
           console.log(authType);
           return auth(authType).then(({user, credential })=> {
             const userData = user.providerData[0]
-            const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
+            const userInfo = formatUserInfo(userData.displayName,  user.uid)
             return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
           })
           .then(({user}) => saveUser(user))

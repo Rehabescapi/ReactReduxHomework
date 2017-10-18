@@ -19,6 +19,8 @@ export function logout () {
     return firebaseAuth().signOut()
 }
 export function saveUser (user){
+    console.log(user);
+    console.log('userSaved');
 return ref.child(`users/${user.uid}/info`)
 .set(user)
 .then(()=> user)
