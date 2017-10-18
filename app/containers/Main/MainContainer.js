@@ -17,8 +17,10 @@ import {firebaseAuth } from 'config/constants'
     componentDidMount () {
         firebaseAuth().onAuthStateChanged((user) => {
           if (user) {
+          
             const userData = user.providerData[0]
             const userInfo = formatUserInfo(userData.displayName,  user.uid)
+            console.log(userData)
             this.props.authUser(user.uid)
             this.props.fetchingUserSuccess(user.uid, userInfo, Date.now())
             if (this.props.location.pathname === '/feed') {

@@ -9,7 +9,6 @@ Navigation.propTypes = NavLinks.propTypes = ActionLinks.propTypes = {
   isAuthed: PropTypes.bool.isRequired,
 }
 export default function Navigation ({isAuthed}){
-    console.log(isAuthed)
    return (
       <div className={container}>
         <nav className={navContainer}>
@@ -30,7 +29,6 @@ function NavLinks ({isAuthed}){
 }
 
 function ActionLinks({isAuthed}){
-    console.log(isAuthed)
     return !!isAuthed === true ? 
     <ul>
         <li> </li>

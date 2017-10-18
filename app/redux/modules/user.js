@@ -63,7 +63,7 @@ function fetchingUserFailure (error) {
           console.log(authType);
           return auth(authType).then(({user, credential })=> {
             const userData = user.providerData[0]
-            const userInfo = formatUserInfo(userData.displayName,  user.uid)
+            const userInfo = formatUserInfo(userData.displayName, user.uid)
             return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
           })
           .then(({user}) => saveUser(user))
