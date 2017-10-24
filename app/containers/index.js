@@ -4,3 +4,4 @@ export AuthenticateContainer from './AuthenticateContainer/AuthenticateContainer
 export NotFoundContainer from './NotFoundContainer/NotFoundContainer'
 export FeedContainer from './FeedContainer/FeedContainer'
 export LogoutContainer from './LogoutContainer/LogoutContainer'
+export ModalContainer from './ModalContainer/ModalContainer'

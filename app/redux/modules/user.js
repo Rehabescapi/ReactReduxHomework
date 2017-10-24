@@ -116,6 +116,7 @@ export default function users (state = initialState , action) {
             ...state, 
             isAuthed: false,
             authedId: '',
+           
         }
         case FETCHING_USER :
             return {

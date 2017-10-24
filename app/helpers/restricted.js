@@ -15,14 +15,17 @@ export default (BaseComponent, store) => {
     }
 
     checkAuthentication (props) {
+     
       if (store.getState().users.isFetching === true) {
+        
         return
       }
 
       const { history } = props
       const nextPathName = history.location.pathname
+      console.log(nextPathName)
       const isAuthed = checkIfAuthed(store)
-      if (nextPathName === '/' || nextPathName === '/login') {
+      if (nextPathName === '/' || nextPathName === '/login' ) {
         if (isAuthed === true) {
           history.replace({ pathname: '/feed' })
         }
