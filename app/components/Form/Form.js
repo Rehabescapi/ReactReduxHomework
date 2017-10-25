@@ -1,93 +1,93 @@
-import react, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-//import { button } from './styles.css'
+// import { button } from './styles.css'
 
-import { FormErrors } from './FormErrors';
-import './Form.css';
+import { FormErrors } from './FormErrors'
+import './Form.css'
 
 class Form extends Component {
-  constructor ({onAuth, isFetching} , props) {
-    super(props);
+  constructor ({onAuth, isFetching}, props) {
+    super(props)
     this.state = {
       email: '',
       password: '',
       formErrors: {email: '', password: ''},
       emailValid: false,
       passwordValid: false,
-      formValid: false
+      formValid: false,
     }
   }
 
   handleUserInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const name = e.target.name
+    const value = e.target.value
     this.setState({[name]: value},
-                  () => { this.validateField(name, value) });
+      () => { this.validateField(name, value) })
   }
 
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
-    let passwordValid = this.state.passwordValid;
+  validateField (fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors
+    let emailValid = this.state.emailValid
+    let passwordValid = this.state.passwordValid
 
-    switch(fieldName) {
+    switch (fieldName) {
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-        break;
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid'
+        break
       case 'password':
-        passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
-        break;
+        passwordValid = value.length >= 6
+        fieldValidationErrors.password = passwordValid ? '' : ' is too short'
+        break
       default:
-        break;
+        break
     }
     this.setState({formErrors: fieldValidationErrors,
-                    emailValid: emailValid,
-                    passwordValid: passwordValid
-                  }, this.validateForm);
+      emailValid: emailValid,
+      passwordValid: passwordValid,
+    }, this.validateForm)
   }
 
-  validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+  validateForm () {
+    this.setState({formValid: this.state.emailValid && this.state.passwordValid})
   }
 
-  errorClass(error) {
-    return(error.length === 0 ? '' : 'has-error');
+  errorClass (error) {
+    return (error.length === 0 ? '' : 'has-error')
   }
 
   render () {
     return (
-      <form className="demoForm">
+      <form className='demoForm'>
         <h2>Sign up</h2>
-        <div className="panel panel-default">
+        <div className='panel panel-default'>
           <FormErrors formErrors={this.state.formErrors} />
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-          <label htmlFor="email">Email address</label>
-          <input type="email" required className="form-control" name="email"
-            placeholder="Email"
+          <label htmlFor='email'>Email address</label>
+          <input type='email' required={true} className='form-control'
+            name='email'
+            placeholder='Email'
             value={this.state.email}
-            onChange={this.handleUserInput}  />
+            onChange={this.handleUserInput} />
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-          <label htmlFor="password">Password</label>
-          <input type="password" className="form-control" name="password"
-            placeholder="Password"
+          <label htmlFor='password'>Password</label>
+          <input type='password' className='form-control' name='password'
+            placeholder='Password'
             value={this.state.password}
-            onChange={this.handleUserInput}  />
+            onChange={this.handleUserInput} />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid} onClick={(e)=> onAuth(e,'FORM_AUTH')}>Sign up</button>
+        <button type='submit' className='btn btn-primary' disabled={!this.state.formValid}
+          onClick={(e) => onAuth(e, 'FORM_AUTH')}>Sign up</button>
       </form>
     )
   }
 }
 
-
 Form.propTypes = {
-  onAuth : PropTypes.func.isRequired,
-  isFetching : PropTypes.bool.isRequired,
+  onAuth: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 }
 
-
-export default Form;
+export default Form
