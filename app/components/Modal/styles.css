@@ -22,6 +22,13 @@
   }
 
 
+  .titleInput {
+    composes: baseTextArea from 'sharedStyles/styles.css';
+    height: 25px;
+    border-width: 0;
+  }
+
+  
   .pointer {
     cursor: pointer;
   }
@@ -30,6 +37,10 @@
     composes: baseTextAreaContainer from 'sharedStyles/styles.css';
   }
   
+.titleContainer {
+  composes: newInputContainer;
+  height: 40px;
+}
   .newInput {
     composes: baseTextArea from 'sharedStyles/styles.css';
     border-width: 0;

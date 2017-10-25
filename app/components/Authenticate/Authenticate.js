@@ -6,7 +6,7 @@ import { centeredContainer, largeHeader, errorMsg} from 'shared/styles.css'
 export default function Authenticate ({isFetching, error, onAuth}) {
   const FacebookAuthentication = true
   const FormAuthentication = false
-  console.log(isFetching)
+  
   return (
     <div className = {centeredContainer} >
       <h1 className = {largeHeader}> Authenticate </h1>

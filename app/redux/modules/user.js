@@ -33,8 +33,6 @@ export function logoutAndUnauth () {
   }
 }
 function fetchingUserFailure (error) {
-  console.warn(error)
-  console.log('woo')
   return {
     type: FETCHING_USER_FAILURE,
     error: 'Error fetching user',
@@ -59,7 +57,6 @@ export function removeFetchingUser () {
 export function fetchAndHandleAuthedUser (authType) {
   return function (dispatch) {
     dispatch(fetchingUser())
-    console.log(authType)
     return auth(authType).then(({ user, credential }) => {
       const userData = user.providerData[0]
       const userInfo = formatUserInfo(userData.displayName, user.uid)

@@ -21,7 +21,6 @@ export default (BaseComponent, store) => {
 
       const { history } = props
       const nextPathName = history.location.pathname
-      console.log(nextPathName)
       const isAuthed = checkIfAuthed(store)
       if (nextPathName === '/' || nextPathName === '/login') {
         if (isAuthed === true) {

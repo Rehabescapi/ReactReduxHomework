@@ -35,13 +35,23 @@ Modal.propTypes = {
   saveAndCloseModal: func.isRequired,
 }
 
+var counter = 0;
 export default function Modal (props) {
+
   function submitDecision () {
     props.saveAndCloseModal(formatDecision(props.decisionText, props.optionAText, props.optionBText, props.user))
   }
+  function openDuckTape(){
+    if(counter %2===0){
+      
+    props.openModal()
+    }
+    counter++;
+   
+  }
 
   return (
-    <span className={darkBtn} onClick={props.openModal}>
+    <span className={darkBtn} onClick={openDuckTape}>
       {'New Decision'}
       <ReactModal style ={modalStyle} isOpen={props.isOpen} onRequestClose={props.closeModal}>
         <div className= {newDecisionTop}>
