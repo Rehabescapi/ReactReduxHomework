@@ -26,6 +26,7 @@ function getPercentageColor (type) {
 }
 
 function Card (props) {
+  console.log(props)
   return (
     <div
       onClick={props.onSelect}
@@ -56,18 +57,18 @@ optionB: {
   selectedCount: 0,
 }, */
 
-Decide.propTypes = {
+Detail.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   decision: PropTypes.shape({
     author: PropTypes.object,
     decisionId: PropTypes.string,
     optionA: PropTypes.shape({
       selectedCount: PropTypes.number,
-      decisionTextA: PropTypes.string,
+      text: PropTypes.string,
     }),
     optionB: PropTypes.shape({
       selectedCount: PropTypes.number,
-      selectedBText: PropTypes.string,
+      text: PropTypes.string,
     }),
     timestamp: PropTypes.number,
   }).isRequired,
@@ -75,7 +76,7 @@ Decide.propTypes = {
   onSelect: PropTypes.func.isRequired,
 }
 
-export default function Decide ({usersDecision, decision, onSelect, isFetching}) {
+export default function Detail ({usersDecision, decision, onSelect, isFetching}) {
   if (isFetching === true) {
     return <Spinner />
   }
@@ -92,16 +93,16 @@ export default function Decide ({usersDecision, decision, onSelect, isFetching})
           cardType='first'
           chosen={noDecisionMade ? false : usersDecision.chosen === 'firstOption'}
           showResult={!noDecisionMade}
-          decision={decision.firstOption}
-          percentage={totalCount === 0 ? 0 : parseInt(decision.firstOption.selectedCount / totalCount * 100)}
-          onSelect={() => usersDecision && usersDecision.chosen === 'firstOption' ? null : onSelect('firstOption', !noDecisionMade)} />
+          decision={decision.optionA}
+          percentage={totalCount === 0 ? 0 : parseInt(decision.optionA.selectedCount / totalCount * 100)}
+          onSelect={() => usersDecision && usersDecision.chosen === 'firstOption' ? null : onSelect('optionA', !noDecisionMade)} />
         <Card
           cardType='second'
           chosen={noDecisionMade ? false : usersDecision.chosen === 'secondOption'}
           showResult={!noDecisionMade}
-          decision={decision.secondOption}
-          percentage={totalCount === 0 ? 0 : parseInt(decision.secondOption.selectedCount / totalCount * 100)}
-          onSelect={() => usersDecision && usersDecision.chosen === 'secondOption' ? null : onSelect('secondOption', !noDecisionMade)} />
+          decision={decision.optionB}
+          percentage={totalCount === 0 ? 0 : parseInt(decision.optionB.selectedCount / totalCount * 100)}
+          onSelect={() => usersDecision && usersDecision.chosen === 'secondOption' ? null : onSelect('optionB', !noDecisionMade)} />
       </div>
     </div>
   )

@@ -79,7 +79,7 @@ export default function decisions (state = initialState, action) {
         isFetching: false,
         decision: {
           ...state.decision,
-          [action.AdecisionId]: action.decision,
+          [action.decisionId]: action.decision,
         },
       }
 

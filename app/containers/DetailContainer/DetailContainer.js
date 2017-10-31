@@ -14,7 +14,7 @@ class DetailContainer extends Component {
   }
 
   render () {
-    return <div> {'woo'} </div>
+    return <Detail {...this.props} />
   }
 }
 
@@ -27,27 +27,23 @@ DetailContainer.propTypes = {
   fetchDecision: PropTypes.func.isRequired,
 }
 
-function mapStateToProps (props, {match}) {
-  const users = props.users
-  console.log(props.decisions)
-  const decision = props.decisions.decision[match.params.decisionId]
-  console.log(decision)
-
+function mapStateToProps ({users, decisions}, {match}) {
+  
+  const decision = decisions.decision[match.params.decideId]
+    console.log(decision)
   return {
-    isFetching: false,
+    isFetching: decisions.isFetching,
     decisionNeedsFetching: typeof decision === 'undefined',
     decision: decision || {},
-    usersDecision: users[users.authedId].decisionsMade[match.params.decisionId],
+    usersDecision: users[users.authedId].decisionsMade[match.params.decideId],
   }
 }
 
-function mapDispatchToProps (dispatch, state) {
-  console.log(state.match.params)
-  console.log(dispatch)
-  const a = state.match.params.decideId
+function mapDispatchToProps (dispatch, {match}) {
+ 
   return {
-    onSelect: (option, switchingDecision) => dispatch(addAndHandleDecision(state.match.params.decideId, option, switchingDecision)),
-    fetchDecision: () => dispatch(fetchAndHandleSingleDecision(a)),
+    onSelect: (option, switchingDecision) => dispatch(addAndHandleDecision(match.params.decideId, option, switchingDecision)),
+    fetchDecision: () => dispatch(fetchAndHandleSingleDecision(match.params.decideId)),
   }
 }
 

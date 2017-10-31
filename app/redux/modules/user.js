@@ -98,8 +98,11 @@ function addUserDecision (uid, decisionId, decisionData) {
 
 export function addAndHandleDecision (decisionId, option, switchingDecision) {
   return function (dispatch, getState) {
+    
     const { users, decisions } = getState()
-    const decision = decisions.decisions[decisionId]
+    console.log(users , decisions)
+    console.log(option)
+    const decision = decisions.decision[decisionId]
     const decisionData = {
       chosen: option,
       text: decision[option].text,
