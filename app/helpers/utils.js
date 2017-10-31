@@ -7,6 +7,7 @@ export function formatUserInfo (name, uid) {
   }
 }
 
+
 export function formatDecision (title, decisionTextA, decisionTextB, user) {
   return {
     timestamp: Date.now(),

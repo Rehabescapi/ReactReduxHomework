@@ -1,6 +1,6 @@
-import { listenToDecisions, fetchSingleDecision } from 'helpers/api'
+import { listenToFeed, fetchSingleDecision } from 'helpers/api'
 import { addListener } from 'redux/modules/listeners'
-import { addUser } from 'redux/modules/listeners'
+import { addUser } from 'redux/modules/user'
 
 
 const SETTINGS_DECISIONS_LISTENER = 'SETTINGS_DECISIONS_LISTENER'
@@ -16,6 +16,7 @@ function settingDecisionsListener () {
 }
 
 function settingDecisionsListenerError( error) {
+    console.log('error')
     return {
         type: SETTINGS_DECISIONS_LISTENERERROR ,
         error : 'Error fetching Decisions',
@@ -30,18 +31,18 @@ function settingDecisionsListenerSuccess (data) {
     }
 }
 
-export function setAndHandleDecisionListener () {
+export function setAndHandleDecisionsListener () {
     return function (dispatch, getState ){
         if(getState().listeners.decisions === true)
-        return 
-
-        let initialFetch=true
-        dispatch(addListener('decisions'))
+        {return 
+        }
+        dispatch(addListener('decision'))
         dispatch(settingDecisionsListener())
 
-        listenToFeed((decision)=> {
+        listenToFeed(( decision )=> {
+            console.log(decision)
             dispatch(settingDecisionsListenerSuccess(decision))
-           Object.keys(decision).map((dicisionId) => dispatch(addUser(decisions[decisionId].author)))
+           Object.keys(decision).map((decisionId) => dispatch(addUser(decision[decisionId].author)))
         }, (error) => dispatch(settingDecisionsListenerError(error)))
     }
 }
@@ -50,9 +51,10 @@ export function setAndHandleDecisionListener () {
 //thunk for setting and Handling DecisionListener
 
 
-
+//decision
 
 function addDecision ( decisionId, decision) {
+    console.log(decisionId , decision)
     return 
     {
         type : ADD_DECISION,
@@ -63,6 +65,7 @@ function addDecision ( decisionId, decision) {
 
 
 export function fetchAndHandleSingleDecision (decisionId) {
+    console.log(decisionId)
     return function (dispatch) {
       fetchSingleDecision(decisionId)
         .then((decision) => dispatch(addDecision(decisionId, decision)))
@@ -76,11 +79,12 @@ const initialState= {
     lastUpdated : 0, 
     isFetching: true,
     error : '',
-    decisions: {}, 
+    decision: {}, 
 }
 
 export default function decisions(state = initialState, action)
 {
+    console.log(action.type)
     switch(action.type){
         case SETTINGS_DECISIONS_LISTENER:
         return {
@@ -101,10 +105,20 @@ export default function decisions(state = initialState, action)
                 isFetching : false,
                 error : '',
                 decision :{
-                    ...state.decisions,
-                    [action.decisionId] : action.decision,
+                    ...state.decision,
+                  ...action.data, 
                 }
             }
+        }
+        case ADD_DECISION :
+        console.log(state, action)
+        return {
+          ...state,
+          isFetching: false,
+          decision: {
+            ...state.decision,
+            [action.decisionId]: action.decision,
+          },
         }
         default : 
         return state

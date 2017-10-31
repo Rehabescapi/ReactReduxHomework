@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, IndexRoute, Redirect, Route, Switch } from 'react-router-dom'
-import {MainContainer, HomeContainer, AuthenticateContainer, NotFoundContainer, FeedContainer, LogoutContainer} from 'containers'
+import {MainContainer, HomeContainer, AuthenticateContainer, NotFoundContainer, FeedContainer, LogoutContainer, DetailContainer} from 'containers'
 import { firebaseAuth } from 'config/constants'
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
@@ -55,6 +55,7 @@ export default class GetRoutes extends Component {
                 component={HomeContainer}/>
               <LoggedInRoute authed={this.state.authed} path ='/login' component={AuthenticateContainer}/>
               <PrivateRoute authed={this.state.authed} path ='/feed' component={FeedContainer}/>
+              <PrivateRoute authed={this.state.authed} path = '/details/:decideId' component= {DetailContainer}/>
               <Route path='/logout' component={LogoutContainer}/>
               <Route component={NotFoundContainer}/>
             </Switch>

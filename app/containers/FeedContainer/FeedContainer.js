@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
-
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { Feed} from 'components'
 import { setAndHandleDecisionsListener } from 'redux/modules/decisions'
 import { connect } from 'react-redux'
 import { decisionsAreStale } from 'helpers/utils'
+import {Router, browserHistory} from 'react-router';
+import {withRouter } from 'react-router-dom'
 class FeedContainer extends Component {
-  
+  constructor(props) {
+    super(props)
+    this.handleToDecide = this.handleToDecide.bind(this)
+  }
   componentDidMount () {
-    console.log( this.props.lastUpdated)
     if (decisionsAreStale(this.props.lastUpdated)) {
-      console.log('stale')
       this.props.setAndHandleDecisionsListener()
     }
-    {
-      console.log('not stale')
-    }
-  
+  }
+  handleToDecide( decisionId) {
+    this.context.router.history.replace('details/'+decisionId)
+   // browserHistory.push('/decide/' + decisionId)
   }
  
   render () {
@@ -27,6 +29,8 @@ class FeedContainer extends Component {
         isFetching = {this.props.isFetching}
         error = {this.props.error}
         decisions={this.props.decisions}
+        decisionsMade= {this.props.decisionsMade}
+        onToDecide = {this.handleToDecide}
          />
       </div>
     )
@@ -34,6 +38,7 @@ class FeedContainer extends Component {
 }
 
 FeedContainer.propTypes = {
+  decisionsMade : PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   error : PropTypes.string.isRequired,
   decisions : PropTypes.array.isRequired,
@@ -45,9 +50,9 @@ FeedContainer.contextTypes = {
   router : PropTypes.object.isRequired,
 }
 function mapStateToProps ({decisions, users}) {
-  console.log(decisions)
   const decs = decisions.decision
   return {
+    decisionsMade : users[users.authedId].decisionsMade,
     isFetching: decisions.isFetching,
     lastUpdated : decisions.lastUpdated,
     error : decisions.error,
@@ -65,6 +70,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps)(FeedContainer)
+  mapDispatchToProps)(FeedContainer))

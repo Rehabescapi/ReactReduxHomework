@@ -4,10 +4,15 @@ import { decisionContainer, title, decision, icon , header} from './styles.css'
 import { formatTimestamp } from 'helpers/utils'
 import { Spinner } from 'components'
 
+import Open from 'react-icons/lib/io/ios-circle-outline'
+import Checked from 'react-icons/lib/io/ios-checkmark-outline'
+
 Feed.propTypes = {
   isFetching : PropTypes.bool.isRequired,
   decisions : PropTypes.array.isRequired,
-  error :  PropTypes.string.isRequired
+  error :  PropTypes.string.isRequired,
+  decisionsMade : PropTypes.object.isRequired,
+  onToDecide: PropTypes.func.isRequired,
 }
 
 export default function Feed  (props) {
@@ -16,29 +21,36 @@ export default function Feed  (props) {
  }
  return (
  <div >
-   <h2 className = {header } > Decisions </h2>
+   <h2 className={header}>{'Decisions'} </h2>
    {props.decisions.length === 0 
    ? <div style ={{textAlign : 'center'}}> No Results </div>
    : null }
    { props.error ? <div> {props.error }</div> : null }
-   {props.decisions.map ((decision)=> {
+   {
+     props.decisions.map ((decision)=> {
      const id = decision.decisionId
      return (
       <div
           className={decisionContainer}
-          key={id}>
+          style={{borderLeftColor: props.decisionsMade[id] ? '#66C8EB': '#E73130'}}
+          key={id}
+          onClick={() => props.onToDecide(id)}>>
             <div>
               <div className={title}>{decision.title}</div>
               <div>
                 <span>{formatTimestamp(decision.timestamp)} by {decision.author.name}</span>
               </div>
             </div>
+            <div>
+              {props.decisionsMade[id] ?<Checked className={icon} /> : <Open className={icon} />}
+         </div>
          </div>
      )
    })}
+   </div>
 
 
 
- </div>
+
  )
 }

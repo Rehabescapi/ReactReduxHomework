@@ -18,23 +18,26 @@ class MainContainer extends Component {
         const userData = user.providerData[0]
         const userInfo = formatUserInfo(userData.displayName, user.uid)
         this.props.authUser(user.uid)
-        this.props.fetchingUserSuccess(user.uid, userInfo, Date.now())
-        if (this.props.location.pathname === '/feed') {
+        this.props.fetchAndAddUsersMadeDecisions(user.uid)
+        .then(()=> this.props.fetchingUserSuccess(user.uid, userInfo, Date.now()))
+        .then(() => {if (this.props.location.pathname === '/feed') {
           this.context.router.history.replace('feed')
         }
-      } else {
+      })
+    } else {
         this.props.removeFetchingUser()
       }
     })
   }
 
   render () {
-    return (
-      <div className = {container}>
+    return  this.props.isFetching === true 
+    ? null
+    :<div className={container}>
         <Navigation isAuthed={this.props.isAuthed}/>
         <div className={innerContainer}> {this.props.children}</div>
       </div>
-    )
+    
   }
 }
 MainContainer.propTypes = {
@@ -49,6 +52,6 @@ MainContainer.contextTypes = {
 }
 
 export default withRouter(connect(
-  (state) => ({isAuthed: state.users.isAuthed, isFetching: state.users.isFetching}),
+  ({users}) => ({isAuthed: users.isAuthed, isFetching: users.isFetching}),
   (dispatch) => bindActionCreators({...userActionCreators}, dispatch)
 )(MainContainer))
