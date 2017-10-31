@@ -13,21 +13,18 @@ function settingDecisionsListener () {
   }
 }
 
-function settingDecisionsListenerError (error) {
-  console.log('error')
+function settingDecisionsListenerError () {
   return {
-    type: SETTINGS_DECISIONS_LISTENERERROR,
+    type: SETTINGS_DECISIONS_LISTENER_ERROR,
     error: 'Error fetching Decisions',
   }
 }
 
-function addDecision (decisionId, decision) {
-  console.log(decisionId, decision)
-  const data = {decisionId, decision}
-  return
-  {
-    ADD_DECISION,
-    data
+function addNewDecision (decision, decisionId) {
+  return {
+    type: ADD_DECISION,
+    decision,
+    decisionId,
   }
 }
 
@@ -48,7 +45,6 @@ export function setAndHandleDecisionsListener () {
     dispatch(settingDecisionsListener())
 
     listenToFeed((decision) => {
-      console.log(decision)
       dispatch(settingDecisionsListenerSuccess(decision))
       Object.keys(decision).map((decisionId) => dispatch(addUser(decision[decisionId].author)))
     }, (error) => dispatch(settingDecisionsListenerError(error)))
@@ -60,11 +56,9 @@ export function setAndHandleDecisionsListener () {
 // decision
 
 export function fetchAndHandleSingleDecision (decisionId) {
-  console.log(decisionId)
   return function (dispatch) {
-    console.log(dispatch)
     fetchSingleDecision(decisionId)
-      .then((decision) => dispatch(addDecision(decisionId, decision)))
+      .then((decision) => dispatch(addNewDecision(decision, decisionId)))
       .catch((error) => console.warn('Error fetching decision', error))
   }
 }
@@ -78,16 +72,14 @@ const initialState = {
 }
 
 export default function decisions (state = initialState, action) {
-  console.log(action.type)
   switch (action.type) {
     case ADD_DECISION :
-      console.log('wooo')
       return {
         ...state,
         isFetching: false,
         decision: {
           ...state.decision,
-          [action.AdecisionId]: action.Adecision,
+          [action.AdecisionId]: action.decision,
         },
       }
 
@@ -115,7 +107,7 @@ export default function decisions (state = initialState, action) {
       }
 
     default :
-      console.log(action)
+
       return state
   }
 }

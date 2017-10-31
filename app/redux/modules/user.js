@@ -12,13 +12,12 @@ const ADD_USER = 'ADD_USER'
 const ADD_USERS_MADE_DECISIONS = 'ADD_USERS_MADE_DECISIONS'
 const ADD_USER_DECISION = 'ADD_USER_DECISION'
 
-
-export function addUser ( user){
- return {
-   type : ADD_USER,
-   user, 
-   lastUpdated : Date.now(),
- }
+export function addUser (user) {
+  return {
+    type: ADD_USER,
+    user,
+    lastUpdated: Date.now(),
+  }
 }
 
 export function authUser (uid) {
@@ -80,12 +79,20 @@ export function fetchAndHandleAuthedUser (authType) {
       .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }
- 
+
 export function addUsersMadeDecisions (uid, decisions) {
   return {
     type: ADD_USERS_MADE_DECISIONS,
     uid,
     decisions,
+  }
+}
+function addUserDecision (uid, decisionId, decisionData) {
+  return {
+    type: ADD_USER_DECISION,
+    uid,
+    decisionId,
+    decisionData,
   }
 }
 
@@ -106,14 +113,13 @@ export function addAndHandleDecision (decisionId, option, switchingDecision) {
   }
 }
 
-
 const initialUserState = {
   lastUpdated: 0,
   info: {
     name: '',
     uid: '',
   },
-  decisionsMade : {},
+  decisionsMade: {},
 }
 
 function user (state = initialUserState, action) {
@@ -190,24 +196,24 @@ export default function users (state = initialState, action) {
         ...state,
         isFetching: false,
       }
-      case ADD_USERS_MADE_DECISIONS :
+    case ADD_USERS_MADE_DECISIONS :
       return {
         ...state,
         [action.uid]: {
           ...state[action.uid],
           decisionsMade: action.decisions,
-        }
+        },
       }
-      case ADD_USER : 
+    case ADD_USER :
       return {
-        ...state, 
-        [action.user.uid] : {
-            ...state[action.user.uid],
-            lastUpdated  : action.lastUpdated,
-            info : action.user, 
-          }
+        ...state,
+        [action.user.uid]: {
+          ...state[action.user.uid],
+          lastUpdated: action.lastUpdated,
+          info: action.user,
+        },
       }
-      case ADD_USER_DECISION :
+    case ADD_USER_DECISION :
       return {
         ...state,
         [action.uid]: {
@@ -215,8 +221,8 @@ export default function users (state = initialState, action) {
           decisionsMade: {
             ...state[action.uid].decisionsMade,
             [action.decisionId]: action.decisionData,
-          }
-        }
+          },
+        },
       }
 
     default:

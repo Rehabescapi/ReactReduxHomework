@@ -7,9 +7,6 @@ import { fetchAndHandleSingleDecision } from 'redux/modules/decisions'
 import {withRouter } from 'react-router-dom'
 
 class DetailContainer extends Component {
-  constructor (props) {
-    super(props)
-  }
   componentDidMount () {
     if (this.props.decisionNeedsFetching === true) {
       this.props.fetchDecision()
