@@ -35,16 +35,15 @@ Modal.propTypes = {
   saveAndCloseModal: func.isRequired,
 }
 
-var counter = 0;
+var counter = 0
 export default function Modal (props) {
-
   function submitDecision () {
     props.saveAndCloseModal(formatDecision(props.decisionText, props.optionAText, props.optionBText, props.user))
   }
   return (
     <div>
-    <span className={darkBtn} onClick={props.openModal}>
-      {'New Decision'}</span>
+      <span className={darkBtn} onClick={props.openModal}>
+        {'New Decision'}</span>
       <ReactModal style ={modalStyle} isOpen={props.isOpen} onRequestClose={props.closeModal}>
         <div className= {newDecisionTop}>
           <span > {'What ya rather?'}</span>
@@ -87,7 +86,7 @@ export default function Modal (props) {
           {'Submit'}
         </button>
       </ReactModal>
-    
+
     </div>
   )
 }

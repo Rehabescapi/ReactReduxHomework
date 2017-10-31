@@ -7,7 +7,6 @@ export function formatUserInfo (name, uid) {
   }
 }
 
-
 export function formatDecision (title, decisionTextA, decisionTextB, user) {
   return {
     timestamp: Date.now(),
@@ -24,19 +23,15 @@ export function formatDecision (title, decisionTextA, decisionTextB, user) {
   }
 }
 
-
 export function formatTimestamp (timestamp) {
   const date = new Date(timestamp)
   return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 }
 
 function getMilliseconds (timestamp) {
-  return  new Date().getTime() - new Date(timestamp).getTime()
- 
+  return new Date().getTime() - new Date(timestamp).getTime()
 }
 
 export function decisionsAreStale (timestamp) {
-
-return getMilliseconds(timestamp) > decisionsExpirationLength
-
+  return getMilliseconds(timestamp) > decisionsExpirationLength
 }

@@ -19,25 +19,25 @@ class MainContainer extends Component {
         const userInfo = formatUserInfo(userData.displayName, user.uid)
         this.props.authUser(user.uid)
         this.props.fetchAndAddUsersMadeDecisions(user.uid)
-        .then(()=> this.props.fetchingUserSuccess(user.uid, userInfo, Date.now()))
-        .then(() => {if (this.props.location.pathname === '/feed') {
-          this.context.router.history.replace('feed')
-        }
-      })
-    } else {
+          .then(() => this.props.fetchingUserSuccess(user.uid, userInfo, Date.now()))
+          .then(() => {
+            if (this.props.location.pathname === '/feed') {
+              this.context.router.history.replace('feed')
+            }
+          })
+      } else {
         this.props.removeFetchingUser()
       }
     })
   }
 
   render () {
-    return  this.props.isFetching === true 
-    ? null
-    :<div className={container}>
+    return this.props.isFetching === true
+      ? null
+      : <div className={container}>
         <Navigation isAuthed={this.props.isAuthed}/>
         <div className={innerContainer}> {this.props.children}</div>
       </div>
-    
   }
 }
 MainContainer.propTypes = {

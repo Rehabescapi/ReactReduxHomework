@@ -7,7 +7,6 @@ import { Spinner } from 'components'
 
 import Checked from 'react-icons/lib/io/ios-checkmark-outline'
 
-
 Card.propTypes = {
   chosen: PropTypes.bool.isRequired,
   showResult: PropTypes.bool.isRequired,
@@ -31,15 +30,15 @@ function Card (props) {
     <div
       onClick={props.onSelect}
       className={cardContainer}
-      style={{backgroundColor: props.cardType === 'first' ? '#66C8EB': '#E73130'}}>
-        {props.showResult === true
-          ? <div>
-              {props.chosen === true ? <Checked className={icon} /> : null}
-              <div className={percentage} style={getPercentageColor(props.cardType)}>{props.percentage}%</div>
-              <div className={agree}>{props.decision.selectedCount} {props.chosen === true ? props.decision.selectedCount === 1 ? 'agrees' : 'agree' : 'disagree'}</div>
-              <div className={decisionTextAnswered} style={{fontSize: props.showResult === true ? 15 : 25}}>{props.decision.text}</div>
-            </div>
-          : <div className={decisionText}>{props.decision.text}</div>}
+      style={{backgroundColor: props.cardType === 'first' ? '#66C8EB' : '#E73130'}}>
+      {props.showResult === true
+        ? <div>
+          {props.chosen === true ? <Checked className={icon} /> : null}
+          <div className={percentage} style={getPercentageColor(props.cardType)}>{props.percentage}%</div>
+          <div className={agree}>{props.decision.selectedCount} {props.chosen === true ? props.decision.selectedCount === 1 ? 'agrees' : 'agree' : 'disagree'}</div>
+          <div className={decisionTextAnswered} style={{fontSize: props.showResult === true ? 15 : 25}}>{props.decision.text}</div>
+        </div>
+        : <div className={decisionText}>{props.decision.text}</div>}
     </div>
   )
 }
@@ -55,7 +54,7 @@ optionA: {
 optionB: {
   text: decisionTextB,
   selectedCount: 0,
-},*/
+}, */
 
 Decide.propTypes = {
   isFetching: PropTypes.bool.isRequired,
@@ -80,7 +79,7 @@ export default function Decide ({usersDecision, decision, onSelect, isFetching})
   if (isFetching === true) {
     return <Spinner />
   }
-console.log(decision)
+  console.log(decision)
   const totalCount = decision.optionA.selectedCount + decision.optionB.selectedCount
   const noDecisionMade = typeof usersDecision === 'undefined'
 
