@@ -1,22 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FacebookAuthButton, Form} from 'components'
-import { centeredContainer, largeHeader, errorMsg} from 'shared/styles.css'
+import { FacebookAuthButton, Login, Register } from 'components'
+import { centeredContainer, largeHeader, errorMsg } from 'shared/styles.css'
 
 export default function Authenticate ({isFetching, error, onAuth}) {
   const FacebookAuthentication = true
-  const FormAuthentication = false
+  const FormAuthentication = true
 
   return (
     <div className = {centeredContainer} >
-      <h1 className = {largeHeader}> Authenticate </h1>
+      <h1 className = {largeHeader}> {'Authenticate'} </h1>
       {FacebookAuthentication &&
             <FacebookAuthButton
               isFetching = {isFetching}
               onAuth= {onAuth}/>}
 
+      {FormAuthentication &&
+        <Login isFetching = {isFetching}
+          onAuth = {onAuth}/>}
       {error && <p className={errorMsg}> {error} </p>}
 
+        {FormAuthentication && 
+        <Register />
+        }
     </div>
   )
 }

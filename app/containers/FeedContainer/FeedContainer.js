@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { Feed} from 'components'
+import { Feed } from 'components'
 import { setAndHandleDecisionsListener } from 'redux/modules/decisions'
 import { connect } from 'react-redux'
 import { decisionsAreStale } from 'helpers/utils'
-import {Router, browserHistory} from 'react-router'
-import {withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+
 class FeedContainer extends Component {
   constructor (props) {
     super(props)

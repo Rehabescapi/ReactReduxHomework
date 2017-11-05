@@ -15,12 +15,10 @@ export function closeModal () {
   }
 }
 export function updateDecisionText (decisionType, decisionText) {
-  {
-    return {
-      type: UPDATE_DECISION_TEXT,
-      decisionType,
-      decisionText,
-    }
+  return {
+    type: UPDATE_DECISION_TEXT,
+    decisionType,
+    decisionText,
   }
 }
 

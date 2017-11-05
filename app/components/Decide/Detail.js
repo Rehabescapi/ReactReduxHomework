@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { cardContainer, container, or, decisionText, percentage, agree, decisionTextAnswered, icon } from './styles.css'
 import { header } from 'sharedStyles/styles.css'
-import {formatTimestamp } from 'helpers/utils'
+
 import { Spinner } from 'components'
 
 import Checked from 'react-icons/lib/io/ios-checkmark-outline'
@@ -26,7 +26,6 @@ function getPercentageColor (type) {
 }
 
 function Card (props) {
-  console.log(props)
   return (
     <div
       onClick={props.onSelect}
@@ -35,7 +34,7 @@ function Card (props) {
       {props.showResult === true
         ? <div>
           {props.chosen === true ? <Checked className={icon} /> : null}
-          <div className={percentage} style={getPercentageColor(props.cardType)}>{props.percentage}%</div>
+          <div className={percentage} style={getPercentageColor(props.cardType)}>{props.percentage}{'%'}</div>
           <div className={agree}>{props.decision.selectedCount} {props.chosen === true ? props.decision.selectedCount === 1 ? 'agrees' : 'agree' : 'disagree'}</div>
           <div className={decisionTextAnswered} style={{fontSize: props.showResult === true ? 15 : 25}}>{props.decision.text}</div>
         </div>
@@ -43,19 +42,6 @@ function Card (props) {
     </div>
   )
 }
-
-/*
-timestamp: Date.now(),
-author: user,
-title,
-optionA: {
-  text: decisionTextA,
-  selectedCount: 0,
-},
-optionB: {
-  text: decisionTextB,
-  selectedCount: 0,
-}, */
 
 Detail.propTypes = {
   isFetching: PropTypes.bool.isRequired,
@@ -80,15 +66,15 @@ export default function Detail ({usersDecision, decision, onSelect, isFetching})
   if (isFetching === true) {
     return <Spinner />
   }
-  console.log(decision)
+
   const totalCount = decision.optionA.selectedCount + decision.optionB.selectedCount
   const noDecisionMade = typeof usersDecision === 'undefined'
 
   return (
     <div>
-      <h2 className={header}>Would you rather...</h2>
+      <h2 className={header}>{'Would you rather...'}</h2>
       <div className={container}>
-        <div className={or}><span>or</span></div>
+        <div className={or}><span>{'or'}</span></div>
         <Card
           cardType='first'
           chosen={noDecisionMade ? false : usersDecision.chosen === 'firstOption'}

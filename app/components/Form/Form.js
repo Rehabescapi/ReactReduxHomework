@@ -64,7 +64,7 @@ class Form extends Component {
           <FormErrors formErrors={this.state.formErrors} />
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-          <label htmlFor='email'>Email address</label>
+          <label htmlFor='email'>{'Email address'}</label>
           <input type='email' required={true} className='form-control'
             name='email'
             placeholder='Email'
@@ -72,14 +72,14 @@ class Form extends Component {
             onChange={this.handleUserInput} />
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-          <label htmlFor='password'>Password</label>
+          <label htmlFor='password'>{'Password'}</label>
           <input type='password' className='form-control' name='password'
             placeholder='Password'
             value={this.state.password}
             onChange={this.handleUserInput} />
         </div>
         <button type='submit' className='btn btn-primary' disabled={!this.state.formValid}
-          onClick={(e) => onAuth(e, 'FORM_AUTH')}>Sign up</button>
+          onClick={(e) => onAuth(e, 'FORM_AUTH')}>{'Sign up'}</button>
       </form>
     )
   }

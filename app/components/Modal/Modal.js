@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { default as ReactModal } from 'react-modal'
-import {
-  newDecisionTop, pointer, newInputContainer,
+import { newDecisionTop, pointer, newInputContainer,
   newInput, submitBtn, darkBtn, or, titleInput,
   titleContainer } from './styles.css'
 import { formatDecision } from 'helpers/utils'
@@ -18,7 +17,7 @@ const modalStyle = {
   },
 }
 
-const { object, string, func, bool} = PropTypes
+const { string, func, bool} = PropTypes
 
 Modal.propTypes = {
   decisionText: string.isRequired,
@@ -35,7 +34,6 @@ Modal.propTypes = {
   saveAndCloseModal: func.isRequired,
 }
 
-var counter = 0
 export default function Modal (props) {
   function submitDecision () {
     props.saveAndCloseModal(formatDecision(props.decisionText, props.optionAText, props.optionBText, props.user))
@@ -69,7 +67,7 @@ export default function Modal (props) {
             placeholder='firstDecision'/>
         </div>
 
-        <div className={or}>OR</div>
+        <div className={or}>{'OR'}</div>
         <div className={newInputContainer}>
           <textarea
             onChange={(e) => props.updateDecisionText('optionBText', e.target.value)}

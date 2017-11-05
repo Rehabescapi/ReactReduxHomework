@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { decisionContainer, title, decision, icon, header} from './styles.css'
+import { decisionContainer, title, icon, header } from './styles.css'
 import { formatTimestamp } from 'helpers/utils'
 import { Spinner } from 'components'
 
@@ -23,7 +23,7 @@ export default function Feed (props) {
     <div >
       <h2 className={header}>{'Decisions'} </h2>
       {props.decisions.length === 0
-        ? <div style ={{textAlign: 'center'}}> No Results </div>
+        ? <div style ={{textAlign: 'center'}}> {'No Results'} </div>
         : null }
       { props.error ? <div> {props.error }</div> : null }
       {
@@ -34,11 +34,11 @@ export default function Feed (props) {
               className={decisionContainer}
               style={{borderLeftColor: props.decisionsMade[id] ? '#66C8EB' : '#E73130'}}
               key={id}
-              onClick={() => props.onToDecide(id)}>>
+              onClick={() => props.onToDecide(id)}>
               <div>
                 <div className={title}>{decision.title}</div>
                 <div>
-                  <span>{formatTimestamp(decision.timestamp)} by {decision.author.name}</span>
+                  <span>{formatTimestamp(decision.timestamp)}{' by '}{decision.author.name}</span>
                 </div>
               </div>
               <div>

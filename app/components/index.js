@@ -8,3 +8,6 @@ export Feed from './Feed/Feed'
 export Modal from './Modal/Modal'
 export Spinner from './Spinner/Spinner'
 export Detail from './Decide/Detail'
+
+export Login from './Login/Login'
+export Register from './Register/Register'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, IndexRoute, Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import {MainContainer, HomeContainer, AuthenticateContainer, NotFoundContainer, FeedContainer, LogoutContainer, DetailContainer} from 'containers'
 import { firebaseAuth } from 'config/constants'
 

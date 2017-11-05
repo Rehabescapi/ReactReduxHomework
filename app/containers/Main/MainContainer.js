@@ -45,6 +45,10 @@ MainContainer.propTypes = {
   isAuthed: PropTypes.bool.isRequired,
   authUser: PropTypes.func.isRequired,
   fetchingUserSuccess: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  location: PropTypes.object,
+  removeFetchingUser: PropTypes.func.isRequired,
+
 }
 
 MainContainer.contextTypes = {

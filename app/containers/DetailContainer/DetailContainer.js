@@ -1,10 +1,9 @@
-import React, {Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Detail } from 'components'
 import { addAndHandleDecision } from 'redux/modules/user'
 import { fetchAndHandleSingleDecision } from 'redux/modules/decisions'
-import {withRouter } from 'react-router-dom'
 
 class DetailContainer extends Component {
   componentDidMount () {
@@ -28,9 +27,7 @@ DetailContainer.propTypes = {
 }
 
 function mapStateToProps ({users, decisions}, {match}) {
-  
   const decision = decisions.decision[match.params.decideId]
-    console.log(decision)
   return {
     isFetching: decisions.isFetching,
     decisionNeedsFetching: typeof decision === 'undefined',
@@ -40,7 +37,6 @@ function mapStateToProps ({users, decisions}, {match}) {
 }
 
 function mapDispatchToProps (dispatch, {match}) {
- 
   return {
     onSelect: (option, switchingDecision) => dispatch(addAndHandleDecision(match.params.decideId, option, switchingDecision)),
     fetchDecision: () => dispatch(fetchAndHandleSingleDecision(match.params.decideId)),

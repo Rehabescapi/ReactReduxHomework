@@ -1,6 +1,6 @@
 import { auth, logout, saveUser } from 'helpers/auth'
 import { formatUserInfo } from 'helpers/utils'
-import { fetchUser, fetchUsersMadeDecisions, addDecisionToUser, incrementSelectedCount, decrementSelectedCount } from 'helpers/api'
+import { fetchUsersMadeDecisions, addDecisionToUser, incrementSelectedCount, decrementSelectedCount } from 'helpers/api'
 
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
@@ -98,10 +98,7 @@ function addUserDecision (uid, decisionId, decisionData) {
 
 export function addAndHandleDecision (decisionId, option, switchingDecision) {
   return function (dispatch, getState) {
-    
     const { users, decisions } = getState()
-    console.log(users , decisions)
-    console.log(option)
     const decision = decisions.decision[decisionId]
     const decisionData = {
       chosen: option,
