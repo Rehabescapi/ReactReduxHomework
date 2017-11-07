@@ -29,6 +29,15 @@ export function fetchUser (uid) {
     .then((snapshot) => snapshot.val())
 }
 
+export function deleteUser(uid) {
+  var user =  ref.child(`users/${uid}`)
+  user.delete().then (function() {
+
+  }).catch(function(error){
+
+  })
+}
+
 export function addDecisionToUser (uid, decisionId, data) {
   return ref.child(`users/${uid}/decisionsMade/${decisionId}`)
     .set(data)

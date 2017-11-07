@@ -8,7 +8,7 @@
     "production": "webpack -p",
     "lint": "eslint app/.; exit 0",
     "fix": "eslint --fix app/.; exit 0",
-    "test": "jest",
+    "test": "jest; exit 0",
     "test:watch": "npm test -- --watch"
   },
   "author": "",
@@ -30,12 +30,14 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1",
+    "expect": "^21.2.1",
     "html-webpack-plugin": "^2.30.1",
     "install": "^0.10.1",
     "jest": "^21.2.1",
     "npm": "^5.5.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "redux-mock-store": "^1.3.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
@@ -50,8 +52,17 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
+    "react-test-renderer": "^16.0.0",
     "redux": "^3.7.2",
     "redux-modal": "^1.5.3",
     "redux-thunk": "^2.2.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "config/constants": "/Users/jasonlehmann/Projects/TylerReact/ReactReduxHomeWork/app/config/constants",
+      "helpers/auth": "/Users/jasonlehmann/Projects/TylerReact/ReactReduxHomeWork/app/helpers/auth",
+      "helpers/api": "/Users/jasonlehmann/Projects/TylerReact/ReactReduxHomeWork/app/helpers/api",
+      "helpers/utils": "/Users/jasonlehmann/Projects/TylerReact/ReactReduxHomeWork/app/helpers/utils"
+    }
   }
 }

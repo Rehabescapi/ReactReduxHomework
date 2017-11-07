@@ -1,6 +1,6 @@
 import { auth, logout, saveUser } from 'helpers/auth'
 import { formatUserInfo } from 'helpers/utils'
-import { fetchUsersMadeDecisions, addDecisionToUser, incrementSelectedCount, decrementSelectedCount } from 'helpers/api'
+import { fetchUsersMadeDecisions, addDecisionToUser, incrementSelectedCount, decrementSelectedCount, deleteUser } from 'helpers/api'
 
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
@@ -122,7 +122,7 @@ const initialUserState = {
   decisionsMade: {},
 }
 
-function user (state = initialUserState, action) {
+export function user (state = initialUserState, action) {
   switch (action.type) {
     case FETCHING_USER_SUCCESS :
       return {
