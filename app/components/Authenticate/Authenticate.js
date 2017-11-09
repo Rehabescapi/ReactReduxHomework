@@ -14,15 +14,18 @@ export default function Authenticate ({isFetching, error, onAuth}) {
             <FacebookAuthButton
               isFetching = {isFetching}
               onAuth= {onAuth}/>}
-
+   <div className="email Component" style={{width : '100%'}}>
       {FormAuthentication &&
         <Login isFetching = {isFetching}
           onAuth = {onAuth}/>}
-      {error && <p className={errorMsg}> {error} </p>}
-
+     
         {FormAuthentication && 
-        <Register />
+        <Register isFetching = {isFetching}
+          onAuth = {onAuth}/>
         }
+        </div>
+        {error && <p className={errorMsg}> {error} </p>}
+
     </div>
   )
 }

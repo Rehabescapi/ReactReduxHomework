@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { login, resetPassword } from 'helpers/auth'
 import { form ,container,  input, button} from './styles.css'
 function setErrorMsg (error) {
@@ -7,14 +8,17 @@ function setErrorMsg (error) {
   }
 }
 
+
 export default class Login extends Component {
   state = { loginMessage: null }
   handleSubmit = (e) => {
+    const creds = {
+      email : this.email.value,
+      password : this.pw.value
+    }
     e.preventDefault()
-    login(this.email.value, this.pw.value)
-      .catch((error) => {
-        this.setState(setErrorMsg('Invalid username/password.'))
-      })
+    this.props.onAuth(e,'EMAIL_LOGIN',creds )
+   
   }
   resetPassword = () => {
     resetPassword(this.email.value)
@@ -28,7 +32,7 @@ export default class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className='form-group'>
             <label>Email</label>
-            <input className='form-control' ref={(email) => this.email = email} placeholder='Email'/>
+            <input className='form-control' type='text' ref={(email) => this.email = email} placeholder='Email'/>
           </div>
           <div className='form-group'>
             <label>{'Password'}</label>
@@ -50,4 +54,9 @@ export default class Login extends Component {
       </div>
     )
   }
+}
+
+Login.propTypes = {
+  onAuth : PropTypes.func.isRequired,
+  isFetching : PropTypes.bool,
 }

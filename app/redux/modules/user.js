@@ -32,7 +32,7 @@ export function unauthUser () {
     type: UNAUTH_USER,
   }
 }
-function fetchingUser () {
+export function fetchingUser () {
   return {
     type: FETCHING_USER,
   }
@@ -66,10 +66,13 @@ export function removeFetchingUser () {
   }
 }
 
-export function fetchAndHandleAuthedUser (authType) {
+//auth from 
+
+export function fetchAndHandleAuthedUser (authType, credentialObject ) {
+  console.log(credentialObject)
   return function (dispatch) {
     dispatch(fetchingUser())
-    return auth(authType).then(({ user, credential }) => {
+    return auth(authType, credentialObject).then(({ user, credential }) => {
       const userData = user.providerData[0]
       const userInfo = formatUserInfo(userData.displayName, user.uid)
       return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
@@ -87,7 +90,7 @@ export function addUsersMadeDecisions (uid, decisions) {
     decisions,
   }
 }
-function addUserDecision (uid, decisionId, decisionData) {
+export function addUserDecision (uid, decisionId, decisionData) {
   return {
     type: ADD_USER_DECISION,
     uid,

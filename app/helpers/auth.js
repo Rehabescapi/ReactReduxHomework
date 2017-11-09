@@ -1,16 +1,19 @@
 import { ref, firebaseAuth } from 'config/constants'
 
-export function auth (authType) {
+export function auth (authType, credential) {
+  console.log(credential)
   switch (authType) {
     case 'FACEBOOK_AUTH':
       return firebaseAuth().signInWithPopup(new firebaseAuth.FacebookAuthProvider())
     case 'FORM_AUTH':
+      return emailAuth(credential.email, credential.password)
     default :
       firebaseAuth().signInWithPopup(new firebaseAuth.EmailAuthProvider.credential())
   }
 }
 
 export function emailAuth (email, pw) {
+  console.log(pw)
   return firebaseAuth().createUserWithEmailAndPassword(email, pw)
     .then(saveUserEmail)
 }

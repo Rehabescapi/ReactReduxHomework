@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { emailAuth } from 'helpers/auth'
+
+import { form ,container,  input, button} from './styles.css'
+
 
 function setErrorMsg (error) {
   return {
@@ -8,20 +12,31 @@ function setErrorMsg (error) {
 }
 
 export default class Register extends Component {
+  constructor(props){
+    super(props)
+    console.log(props)
+  }
   state = { registerError: null }
   handleSubmit = (e) => {
     e.preventDefault()
-    emailAuth(this.email.value, this.pw.value)
+    const creds = {
+      email : this.email.value,
+      password : this.pw.value
+    }
+    console.log(creds.email)
+    console.log(creds.password)
+    this.props.onAuth(e, 'EMAIL_AUTH' , creds )
+   // emailAuth(this.email.value, this.pw.value)
       .catch(e => this.setState(setErrorMsg(e)))
   }
   render () {
     return (
-      <div className={'containers'}>
+      <div className={container}>
         <h1>{'Register'}</h1>
         <form onSubmit={this.handleSubmit}>
           <div className='form-group'>
             <label>{'Email'}</label>
-            <input className='form-control' ref={(email) => this.email = email} placeholder='Email'/>
+            <input className='form-control' type = 'text' ref={(email) => this.email = email} placeholder='Email'/>
           </div>
           <div className='form-group'>
             <label>{'Password'}</label>
@@ -41,4 +56,10 @@ export default class Register extends Component {
       </div>
     )
   }
+}
+
+
+Register.propTypes = {
+  onAuth : PropTypes.func.isRequired,
+  isFetching : PropTypes.bool,
 }

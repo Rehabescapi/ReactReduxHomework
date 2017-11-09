@@ -11,8 +11,9 @@ class AuthenticateContainer extends Component {
     this.handleAuth = this.handleAuth.bind(this)
   }
 
-  handleAuth (e, authType) {
-    this.props.fetchAndHandleAuthedUser(authType)
+  handleAuth (e, authType, credential) {
+    console.log(authType,credential)
+    this.props.fetchAndHandleAuthedUser(authType, credential)
       .then(() => this.context.router.history.replace('feed'))
   }
 

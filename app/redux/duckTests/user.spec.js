@@ -87,9 +87,3 @@ describe('login user', ()=> {
 describe('addUserDummy', () => {
     it('should add a user ')
 })
-
-describe('HandlerActions', () => {
-    beforeEach(function () {
-        moxios.intall();
-    })
-})
