@@ -68,13 +68,17 @@ export function removeFetchingUser () {
 
 //auth from 
 
-export function fetchAndHandleAuthedUser (authType, credentialObject ) {
-  console.log(credentialObject)
+export function fetchAndHandleAuthedUser (authType, credentialObject ={}) {
+
   return function (dispatch) {
     dispatch(fetchingUser())
-    return auth(authType, credentialObject).then(({ user, credential }) => {
+    return auth(authType, credentialObject).then(( user ) => {
+     
+      
       const userData = user.providerData[0]
-      const userInfo = formatUserInfo(userData.displayName, user.uid)
+      const userInfo = formatUserInfo(userData , user.uid)
+      console.log(userInfo)
+      //breaks because the user email options is not elegant;y plugied in
       return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
     })
       .then(({user}) => saveUser(user))

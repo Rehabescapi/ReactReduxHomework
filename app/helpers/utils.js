@@ -1,11 +1,13 @@
 import { decisionsExpirationLength } from 'config/constants'
 
-export function formatUserInfo (name, uid) {
+export function formatUserInfo (name, uid, email = "") {
   return {
     name,
     uid,
+    email
   }
 }
+
 
 export function formatDecision (title, decisionTextA, decisionTextB, user) {
   return {
