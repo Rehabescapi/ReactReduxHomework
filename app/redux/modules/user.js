@@ -74,12 +74,7 @@ export function fetchAndHandleAuthedUser (authType, credentialObject ={}) {
   return function (dispatch) {
     dispatch(fetchingUser())
     return auth(authType, credentialObject).then(( {user} ) => {
-     console.log(user)
-      
-      //const userData = user.providerData[0]
       const userInfo = formatUserInfo(user.displayName , user.uid)
-      console.log(userInfo)
-      //breaks because the user email options is not elegant;y plugied in
       return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
     })
       .then(({user}) => saveUser(user))
