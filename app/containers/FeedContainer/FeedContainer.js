@@ -47,7 +47,10 @@ FeedContainer.propTypes = {
 FeedContainer.contextTypes = {
   router: PropTypes.object.isRequired,
 }
-function mapStateToProps ({decisions, users}) {
+function mapStateToProps (props) {
+  //for some reason I'm not get a decisionsMade error if i delay it as this
+  const users = props.users
+  const decisions =  props.decisions;
   const decs = decisions.decision
   return {
     decisionsMade: users[users.authedId].decisionsMade,
