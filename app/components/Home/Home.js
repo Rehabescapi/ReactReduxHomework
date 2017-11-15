@@ -6,7 +6,7 @@ export default function Home (props) {
   return (
     <div className={container}>
       <p className={title} >{' Would you rather'}</p>
-      <p className={slogan}> {'yada yada classics yo'} </p>
+      <p className={slogan}> {'A quick excercise in redux state management and opinion taker'} </p>
     </div>
   )
 }

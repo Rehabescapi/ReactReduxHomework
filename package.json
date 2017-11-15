@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "production": "webpack -p",
+    "production": "NODE_ENV='production' webpack -p",
     "lint": "eslint app/.; exit 0",
     "fix": "eslint --fix app/.; exit 0",
     "test": "jest; exit 0",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "firebase-init": "firebase login && firebase init",
+    "deploy": "npm run production && firebase deploy"
   },
-  "author": "",
+  "author": "Jason Lehmann baasing project specs off of a Tyler Mcginnis curriculium assignment",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -45,6 +47,7 @@
   },
   "dependencies": {
     "firebase": "^4.6.0",
+    "firebase-tools": "^3.14.0",
     "history": "^4.7.2",
     "react-icons": "^2.2.7",
     "react-loader": "^2.4.2",

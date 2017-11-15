@@ -67,8 +67,6 @@ export function removeFetchingUser () {
   }
 }
 
-//auth from 
-
 export function fetchAndHandleAuthedUser (authType, credentialObject ={}) {
 
   return function (dispatch) {
