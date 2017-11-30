@@ -2,6 +2,7 @@ import { auth, logout, saveUser } from 'helpers/auth'
 import { formatUserInfo } from 'helpers/utils'
 import { fetchUsersMadeDecisions, addDecisionToUser, incrementSelectedCount, decrementSelectedCount, deleteUser } from 'helpers/api'
 
+
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
@@ -67,15 +68,22 @@ export function removeFetchingUser () {
   }
 }
 
-export function fetchAndHandleAuthedUser (authType, credentialObject ={}) {
+export function fetchAndHandleAuthedUser (authType, credentialObject = {}) {
 
   return function (dispatch) {
     dispatch(fetchingUser())
-    return auth(authType, credentialObject).then(( {user} ) => {
+    console.log(authType + " ," + credentialObject.password)
+    return auth(authType, credentialObject).then(( { user} ) => {
+      console.log("user" + user)
+      console.log(user)
       const userInfo = formatUserInfo(user.displayName , user.uid)
-      return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
+     return  dispatch(fetchAndAddUsersMadeDecisions(user.uid))
+     .then(() => dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now())))
+       
     })
-      .then(({user}) => saveUser(user))
+      .then(function ({user}) { console.log(user) 
+        saveUser(user)
+      })
       .then((user) => dispatch(authUser(user.uid)))
       .catch((error) => dispatch(fetchingUserFailure(error)))
   }

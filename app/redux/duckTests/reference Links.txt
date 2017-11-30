@@ -1,0 +1,1 @@
+https://github.com/soumak77/firebase-mock/blob/master/tutorials/proxyquire.md

@@ -53,6 +53,7 @@ export function saveUserEmail (user) {
 }
 
 export function saveUser (user) {
+  console.log(user)
   return ref.child(`users/${user.uid}/info`)
     .set(user)
     .then(() => user)

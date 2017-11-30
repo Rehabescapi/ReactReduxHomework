@@ -4,6 +4,22 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 import * as user  from '../modules/user'
 
+
+  const proxyquire = require('proxyquire')
+  const firebasemock = require('firebase-mock')
+const mockdatabase = new firebasemock.MockFirebase();
+const mockauth =  new firebasemock.MockFirebase();
+const mocksdk = firebasemock.MockFirebaseSdk(path => {
+  return path ? mockdatabase.child(path) : mockdatabase
+}, () => {
+  return mockauth;
+})
+var mySrc = proxyquire('../../config/constants', {
+  firebase: mocksdk
+});
+mockdatabase.flush();
+const firebaseApp = mocksdk.initializeApp();
+
 const initialUserState = {
     lastUpdated: 0,
     info: {
@@ -24,12 +40,15 @@ describe('async action',  () => {
         ]
     
             const emailProp  = {
-                email : 'Email',
+                email : 'JasonMLehmann@gmail.com',
                 password : 'password1'
             }
-            console.log(emailProp.password)
+            const form = {
+              type : 'EMAIL_AUTH'
+            }
+            
         const store = mockStore({ initialUserState })
-        store.dispatch(user.fetchAndHandleAuthedUser('FORM_AUTH', emailProp ))
+        store.dispatch(user.fetchAndHandleAuthedUser(form.type, emailProp ))
     
         expect(store.getActions()).toEqual(expectedActions)
       })

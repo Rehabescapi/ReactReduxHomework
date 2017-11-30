@@ -1,6 +1,8 @@
 import { decisionsExpirationLength } from 'config/constants'
 
 export function formatUserInfo (name, uid, email = "") {
+  console.log(name)
+  console.log(uid)
   return {
     name,
     uid,

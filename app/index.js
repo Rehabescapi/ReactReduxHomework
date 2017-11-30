@@ -7,12 +7,17 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import * as reducers from 'redux/modules'
 import createHistory from 'history/createBrowserHistory'
 
+const logMiddleware = ({getState, dispatch} ) => (next) => (action ) => {
+  console.log(`Action : ${action.type}`);
+  next(action);
+};
+
 
 import thunk from 'redux-thunk'
 const middleware = routerMiddleware(createHistory())
 
 const store = createStore(combineReducers({...reducers, routing: routerReducer}),
-  compose(applyMiddleware(middleware, thunk),
+  compose(applyMiddleware(middleware, thunk,logMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : (f) => f))
 
 ReactDOM.render(

@@ -2,11 +2,28 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
-import moxios from 'moxios'
+var MockFirebase = require ('firebase-mock').MockFirebase
 import expect from 'expect'
 import * as user  from '../modules/user'
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
+
+
+require('firebase-functions').config = jest.fn(() => {
+    console.log('Jest firebase functions.config being called');
+    return {
+      firebase: {
+        databaseURL: 'https://not-a-project.firebaseio.com',
+        storageBucket: 'not-a-project.appspot.com'
+      },
+      gmail: {
+        email: 'testsender@test.com',
+        password: 'testpassword'
+      }
+    };
+  });
+  
+
 
 const test = {
     
